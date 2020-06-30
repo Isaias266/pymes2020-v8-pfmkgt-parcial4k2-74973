@@ -1,0 +1,97 @@
+<div *ngIf="accionABMC=='L'">
+   
+    <div class="row justify-content-center"><h1>Listado Materias</h1></div>
+
+     <div class="row justify-content-center mt-4">
+      <button type="button" class="btn btn-primary" (click)="alta()">
+            <span class="fas fa-plus"></span> Agregar Materia
+        </button>
+       </div>
+
+    <table class="table table-bordered table-striped mt-5">
+      <thead>
+        <tr>
+            <th class="text-center">ID Materia</th>
+            <th class="text-center">Nombre</th>
+            <th class="text-center">Año</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let materia of materias">
+            <td style="width:2%">{{materia.IdMateria}}</td>
+            <td style="width:3%">{{materia.MateriaNombre}}</td>
+            <td style="width:2%">{{materia.MateriaAnio}}</td>
+        </tr>
+      </tbody>
+    </table>
+   </div>
+
+<!--  FORM MODIF Y ALTAS -->
+
+   
+  <div class="justify-content-center" *ngIf=" accionABMC == 'A'">
+    
+    <form name="formMod" [formGroup]='formMod'>
+
+      
+        <div class="row justify-content-center">
+          <h3 *ngIf="accionABMC == 'A'">Agregar Materia</h3>
+        </div>
+      
+        <!--
+        <div class="row justify-content-center">
+          <div class="row col-md-5 justify-content-left mt-3" >
+          <label for="txtID">ID Materia</label>
+          <input readonly type="text" class="form-control" id="txtID" formControlName='txtID' placeholder="ID Materia" maxlength="15">
+          </div>
+        </div>
+        -->
+
+     
+     
+
+      <div class="row justify-content-center">
+          <div class="row col-md-5 justify-content-left mt-4">
+          <label for="txtNombre">Nombre Materia</label>
+          <input type="text" class="form-control" id="txtNombre" formControlName='txtNombre' placeholder="Nombre Materia" >
+          <span class="text-danger" *ngIf="(formMod.controls.txtNombre.touched || submitted) 
+                        && formMod.controls.txtNombre.errors?.required">
+                      Dato requerido.
+                      </span>
+          <span class="text-danger" *ngIf="(formMod.controls.txtNombre.touched || submitted) 
+                        && formMod.controls.txtNombre.errors?.maxlength">
+                      El nombre de la materia no puede tener más de 50 caracteres.
+                      </span>            
+        </div>
+      </div>
+      
+
+      <div class="row justify-content-center">
+        <div class="row col-md-5 justify-content-left mt-4">
+          <label for="txtRanking">Año materia</label>
+          <input type="text" class="form-control" id="txtAnio" formControlName='txtAnio' placeholder="materia">
+          <span class="text-danger" *ngIf="(formMod.controls.txtAnio.touched || submitted) 
+                        && formMod.controls.txtAnio.errors?.required">
+                      Dato requerido.
+                      </span>
+          <span class="text-danger" *ngIf="(formMod.controls.txtAnio.touched || submitted) 
+                        && formMod.controls.txtAnio.errors?.pattern">
+                      El año debe ser un valor numérico entre 0 y 9999.
+                      </span>          
+        </div>
+      </div>      
+
+      <div class="row justify-content-center mt-3">
+            <button type="button" class="btn btn-primary" (click)="insertar()" [disabled]="formMod.invalid">
+                <span class="fas fa-save"></span>  Guardar
+            </button>
+
+            <button type="button"  class="btn btn-danger ml-5" (click)="cancelar()">
+                <span class="fas fa-reply"></span>  Cancelar
+            </button>
+      </div>
+        
+                        
+    </form>
+
+  </div>
